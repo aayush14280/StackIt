@@ -1,7 +1,7 @@
 // next.config.js
 const nextConfig = {
   typescript: {
-    ignoreBuildErrors: true, // ⚠️ Not recommended for production
+    ignoreBuildErrors: true,
   },
   eslint: {
     ignoreDuringBuilds: true,
