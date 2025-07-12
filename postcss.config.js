@@ -4,4 +4,7 @@ export default {
       autoprefixer: {},
     },
   };
-  
+  module.exports = {
+    plugins: {},
+  };
+    
