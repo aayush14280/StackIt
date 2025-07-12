@@ -11,6 +11,8 @@ import {
   signInWithPopup,
 } from 'firebase/auth'
 
+import styles from './login.module.css'
+
 export default function LoginPage() {
   const router = useRouter()
   const [email, setEmail] = useState('')
@@ -29,7 +31,7 @@ export default function LoginPage() {
         await signInWithEmailAndPassword(auth, email, password)
       }
 
-      router.push('/ask') // Redirect after login
+      router.push('/ask')
     } catch (err: any) {
       console.error(err)
       setError(err.message)
@@ -48,52 +50,54 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="max-w-md mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">
-        {isRegistering ? 'Register' : 'Login'}
-      </h1>
-
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <input
-          className="border p-2 rounded"
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          required
-        />
-        <input
-          className="border p-2 rounded"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          required
-        />
-
-        {error && <p className="text-red-500 text-sm">{error}</p>}
-
-        <button type="submit" className="bg-blue-500 text-white py-2 rounded">
+    <div className={styles.pageWrapper}> {/* Full-screen flex wrapper */}
+      <main className={styles.mainContainer}>
+        <h1 className={styles.heading}>
           {isRegistering ? 'Register' : 'Login'}
-        </button>
+        </h1>
 
-        <button
-          type="button"
-          onClick={handleGoogleLogin}
-          className="bg-red-500 text-white py-2 rounded"
-        >
-          Sign in with Google
-        </button>
+        <form onSubmit={handleSubmit} className={styles.formContainer}>
+          <input
+            className={styles.inputField}
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            required
+          />
+          <input
+            className={styles.inputField}
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            required
+          />
 
-        <p
-          className="text-sm cursor-pointer text-blue-500 underline text-center"
-          onClick={() => setIsRegistering(!isRegistering)}
-        >
-          {isRegistering
-            ? 'Already have an account? Login'
-            : 'New user? Register here'}
-        </p>
-      </form>
-    </main>
+          {error && <p className={styles.errorMessage}>{error}</p>}
+
+          <button type="submit" className={styles.submitButton}>
+            {isRegistering ? 'Register' : 'Login'}
+          </button>
+
+          <button
+            type="button"
+            onClick={handleGoogleLogin}
+            className={styles.googleButton}
+          >
+            Sign in with Google
+          </button>
+
+          <p
+            className={styles.toggleLink}
+            onClick={() => setIsRegistering(!isRegistering)}
+          >
+            {isRegistering
+              ? 'Already have an account? Login'
+              : 'New user? Register here'}
+          </p>
+        </form>
+      </main>
+    </div>
   )
 }

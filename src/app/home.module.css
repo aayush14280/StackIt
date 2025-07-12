@@ -1,0 +1,129 @@
+/* Styling for the overall page background */
+body {
+    background-color: #f0f2f5;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Main full-width container */
+  .mainContainer {
+    width: 100%;
+    padding: 2.5rem 3rem; /* Full-width padding on left and right */
+    background-color: #ffffff;
+    box-sizing: border-box;
+  }
+  
+  /* Optional inner container to keep content centered but wide */
+  .innerContent {
+    max-width: 75rem; /* Optional: controls readability on wide screens */
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+  
+  /* Header section */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .heading {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #333333;
+  }
+  
+  .askButton {
+    background-color: #6366f1;
+    color: white;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .askButton:hover {
+    background-color: #4f46e5;
+    transform: translateY(-1px);
+  }
+  
+  .askButton:active {
+    background-color: #4338ca;
+    transform: translateY(0);
+  }
+  
+  /* Question list */
+  .questionsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  
+  /* Individual question card */
+  .questionCard {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 0.6rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e9ecef;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .questionCard:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  }
+  
+  .questionTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #3f51b5;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .questionTitle:hover {
+    text-decoration: underline;
+  }
+  
+  .authorInfo {
+    font-size: 0.875rem;
+    color: #6c757d;
+  }
+  
+  .noQuestions {
+    font-size: 1rem;
+    color: #999;
+  }
+  
+  .tagList {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  
+  .tag {
+    background-color: #e1ecf4;
+    color: #39739d;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+  }
+  

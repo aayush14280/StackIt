@@ -1,0 +1,7 @@
+.contentWrapper {
+    padding-top: 60px; /* Adjust this value to match your header's actual height */
+    /* If you added flex-grow previously, keep it */
+    flex-grow: 1; /* Ensures content wrapper takes available vertical space */
+    /* If you want overall horizontal padding, you can add it here,
+       but your main containers already have max-width and auto margins */
+  }

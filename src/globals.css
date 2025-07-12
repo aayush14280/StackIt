@@ -4,3 +4,7 @@
 
 
 @import "react-quill/dist/quill.snow.css";
+body {
+    padding-top: 64px; /* Match header height */
+  }
+  

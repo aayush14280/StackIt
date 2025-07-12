@@ -1,0 +1,149 @@
+/* Global styles */
+body {
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  /* Main container */
+  .mainContainer {
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 38rem;
+    margin: 2rem auto;
+    box-sizing: border-box;
+  }
+  
+  /* Heading */
+  .heading {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333333;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  /* Form layout */
+  .formContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  
+  /* Shared input styles (title + tags) */
+  .inputField,
+  .tagInput {
+    width: 100%;
+    border: 1px solid #e0e0e0;
+    padding: 0.8rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    color: #333333;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .inputField::placeholder,
+  .tagInput::placeholder {
+    color: #a0a0a0;
+  }
+  
+  .inputField:focus,
+  .tagInput:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  }
+  
+  /* Textarea */
+  .textareaField {
+    width: 100%;
+    border: 1px solid #e0e0e0;
+    padding: 0.8rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    color: #333333;
+    min-height: 180px;
+    resize: vertical;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .textareaField::placeholder {
+    color: #a0a0a0;
+  }
+  
+  .textareaField:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  }
+  
+  /* Submit button */
+  .submitButton {
+    background-color: #6366f1;
+    color: white;
+    padding: 0.9rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    width: 100%;
+  }
+  
+  .submitButton:hover {
+    background-color: #4f46e5;
+    transform: translateY(-1px);
+  }
+  
+  .submitButton:active {
+    background-color: #4338ca;
+    transform: translateY(0);
+  }
+  
+  /* Tag input container */
+  .tagInputContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Tag list */
+  .tagList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  /* Individual tag pill */
+  .tag {
+    background-color: #e0e7ff;
+    color: #1e3a8a;
+    padding: 0.4rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Remove tag button */
+  .removeTagButton {
+    background: none;
+    border: none;
+    margin-left: 0.5rem;
+    color: #1e3a8a;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    padding: 0;
+  }
+  

@@ -2,10 +2,16 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  serverTimestamp,
+} from 'firebase/firestore';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { app } from '@/lib/firebase';
+
+import styles from './ask.module.css';
 
 const db = getFirestore(app);
 const auth = getAuth(app);
@@ -15,12 +21,13 @@ export default function AskPage() {
   const [user, setUser] = useState<any>(null);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [tagInput, setTagInput] = useState('');
+  const [tags, setTags] = useState<string[]>([]);
 
-  // ✅ Detect if user is logged in
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (!currentUser) {
-        router.push('/login'); // redirect to login page
+        router.push('/login');
       } else {
         setUser(currentUser);
       }
@@ -29,49 +36,95 @@ export default function AskPage() {
     return () => unsubscribe();
   }, [router]);
 
+  const handleAddTag = () => {
+    const trimmed = tagInput.trim().toLowerCase();
+    if (trimmed && !tags.includes(trimmed)) {
+      setTags((prev) => [...prev, trimmed]);
+    }
+    setTagInput('');
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleAddTag();
+    }
+  };
+
+  const handleRemoveTag = (tagToRemove: string) => {
+    setTags(tags.filter((tag) => tag !== tagToRemove));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    try {
-      if (!user) throw new Error('User not authenticated');
+    if (!title || !description) return;
 
+    try {
       await addDoc(collection(db, 'questions'), {
-        title,
-        description,
+        title: title.trim(),
+        description: description.trim(),
+        tags,
         author: {
           uid: user.uid,
           email: user.email,
         },
-        createdAt: new Date(),
+        createdAt: serverTimestamp(),
       });
 
-      console.log('Question posted successfully');
-      router.push('/'); // or show success toast
+      router.push('/');
     } catch (error) {
-      console.error('Error posting question:', error);
+      console.error('Error adding document: ', error);
     }
   };
 
   return (
-    <main className="max-w-2xl mx-auto p-6">
-      <h1 className="text-2xl font-semibold mb-4">Ask a Question</h1>
-
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <main className={styles.mainContainer}>
+      <h1 className={styles.heading}>Ask a Question</h1>
+      <form onSubmit={handleSubmit} className={styles.formContainer}>
         <input
-          className="border p-2 rounded"
+          className={styles.inputField}
           placeholder="Enter question title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          required
         />
 
         <textarea
-          className="border p-2 rounded min-h-[150px]"
+          className={styles.textareaField}
           placeholder="Enter question description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          required
         />
 
-        <Button type="submit">Post Question</Button>
+        <div className={styles.tagInputContainer}>
+          <input
+            className={styles.tagInput}
+            placeholder="Add tag and press Enter"
+            value={tagInput}
+            onChange={(e) => setTagInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
+          <div className={styles.tagList}>
+            {tags.map((tag) => (
+              <span key={tag} className={styles.tag}>
+                {tag}
+                <button
+                  type="button"
+                  className={styles.removeTagButton}
+                  onClick={() => handleRemoveTag(tag)}
+                >
+                  ×
+                </button>
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <button type="submit" className={styles.submitButton}>
+          Post Question
+        </button>
       </form>
     </main>
   );

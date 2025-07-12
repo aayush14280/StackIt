@@ -1,40 +1,92 @@
-'use client'
-import { useEffect, useState } from 'react'
-import Link from 'next/link'
-// import { db } from '@/lib/firebase'  // if using Firebase
-// import { collection, getDocs } from 'firebase/firestore'
+'use client';
 
-export default function Home() {
-  const [questions, setQuestions] = useState([])
+import { useEffect, useState } from 'react';
+import { collection, getDocs, query, orderBy } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
+import Link from 'next/link';
+import styles from './home.module.css';
+
+interface Question {
+  id: string;
+  title: string;
+  description: string;
+  tags: string[];
+  author: {
+    email: string;
+  };
+  createdAt: any;
+}
+
+export default function HomePage() {
+  const [questions, setQuestions] = useState<Question[]>([]);
 
   useEffect(() => {
-    // Fetch questions from Firebase (or your API)
-    // getDocs(collection(db, 'questions')).then(snapshot => {
-    //   setQuestions(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })))
-    // })
-  }, [])
+    const fetchQuestions = async () => {
+      try {
+        const q = query(collection(db, 'questions'), orderBy('createdAt', 'desc'));
+        const snapshot = await getDocs(q);
+
+        const fetched: Question[] = snapshot.docs.map((doc) => {
+          const data = doc.data();
+
+          return {
+            id: doc.id,
+            title: data.title || 'Untitled',
+            description: data.description || '',
+            tags: Array.isArray(data.tags) ? data.tags : [],
+            author: {
+              email: data.author?.email || 'Unknown',
+            },
+            createdAt: data.createdAt,
+          };
+        });
+
+        setQuestions(fetched);
+      } catch (error) {
+        console.error('Error fetching questions:', error);
+      }
+    };
+
+    fetchQuestions();
+  }, []);
 
   return (
-    <main className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Recent Questions</h1>
+    <main className={styles.mainContainer}>
+      <div className={styles.header}>
+        <h1 className={styles.heading}>All Questions</h1>
+        <Link href="/ask" className={styles.askButton}>
+          Ask a Question
+        </Link>
+      </div>
 
-      <Link href="/ask" className="text-blue-600 underline mb-4 block">
-        ➕ Ask a new question
-      </Link>
-
-      {questions.length === 0 ? (
-        <p className="text-gray-500">No questions yet.</p>
-      ) : (
-        <ul className="space-y-2">
-          {questions.map((q: any) => (
-            <li key={q.id}>
-              <Link href={`/question/${q.id}`} className="text-blue-500 underline">
-                {q.title}
+      <ul className={styles.questionsList}>
+        {questions.length === 0 ? (
+          <p className={styles.noQuestions}>No questions posted yet. Be the first to ask!</p>
+        ) : (
+          questions.map((q) => (
+            <li key={q.id} className={styles.questionCard}>
+              <Link href={`/question/${q.id}`} className={styles.questionTitle}>
+                <h2>{q.title}</h2>
               </Link>
+
+              <p className={styles.description}>{q.description}</p>
+
+              {/* Show tags if they exist */}
+              {q.tags.length > 0 && (
+                <div className={styles.tagList}>
+                  {q.tags.map((tag, idx) => (
+                    <span key={idx} className={styles.tag}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              <p className={styles.authorInfo}>By: {q.author.email}</p>
             </li>
-          ))}
-        </ul>
-      )}
+          ))
+        )}
+      </ul>
     </main>
-  )
+  );
 }

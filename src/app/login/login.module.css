@@ -1,0 +1,143 @@
+/* login.module.css */
+
+body {
+    /* This would ideally be in a global CSS file like globals.css */
+    background-color: #e3f2fd; /* Light blue background like the image */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Make sure it takes full viewport height */
+    margin: 0;
+    font-family: Arial, sans-serif; /* A generic sans-serif font */
+  }
+  
+  .mainContainer {
+    /* This will be the white card container */
+    background-color: #ffffff; /* White background for the card */
+    padding: 2.5rem; /* Increased padding for more space, similar to image */
+    border-radius: 0.5rem; /* Slightly more rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    width: 100%; /* Take full width of parent container (which will be centered) */
+    max-width: 25rem; /* Specific width similar to the image's form width */
+    text-align: center; /* Center the heading */
+    /* Remove margin-left/right: auto and padding: 1.5rem here if body handles centering */
+    /* The body rules above will center it, so we don't need these here anymore for overall centering */
+  }
+  
+  .heading {
+    font-size: 1.75rem; /* Adjust font size slightly */
+    font-weight: 500; /* Slightly lighter than bold, more like the image */
+    margin-bottom: 2rem; /* More space below the heading */
+    color: #333333; /* Darker text color */
+  }
+  
+  .formContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem; /* Slightly more gap between form elements */
+  }
+  
+  .inputField {
+    border: 1px solid #e0e0e0; /* Lighter border color */
+    padding: 0.8rem 1rem; /* More padding for a taller input field */
+    border-radius: 0.25rem; /* Rounded corners */
+    font-size: 1rem;
+    outline: none; /* Remove default outline */
+  }
+  
+  .inputField:focus {
+    border-color: #90caf9; /* Light blue border on focus, similar to active states */
+    box-shadow: 0 0 0 2px rgba(144, 202, 249, 0.3); /* Subtle focus shadow */
+  }
+  
+  .errorMessage {
+    color: #ef4444;
+    font-size: 0.875rem;
+    text-align: left; /* Align error message to the left */
+    margin-top: -0.5rem; /* Pull it slightly up to reduce gap */
+  }
+  
+  .submitButton {
+    background-color: #3f51b5; /* A deeper blue for the sign-in button */
+    color: white;
+    padding: 0.75rem 1.25rem; /* More padding for a larger button */
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    font-weight: 600; /* Slightly bolder text */
+    cursor: pointer;
+    border: none; /* Remove default button border */
+    transition: background-color 0.2s ease; /* Smooth transition on hover */
+  }
+  
+  .submitButton:hover {
+    background-color: #303f9f; /* Darker blue on hover */
+  }
+  
+  .googleButton {
+    /* The image doesn't show a Google button, but if you keep it, we can style it. */
+    /* If you want to remove it to match the image, delete this style. */
+    background-color: #ea4335; /* Google red */
+    color: white;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s ease;
+    margin-top: 0.5rem; /* Small gap from previous button */
+  }
+  
+  .googleButton:hover {
+    background-color: #d13a2f;
+  }
+  
+  /* For the "Forgot Password" and "Sign Up" links */
+  .forgotPasswordLink,
+  .toggleLink {
+    font-size: 0.875rem;
+    cursor: pointer;
+    color: #4285f4; /* A lighter, more google-like blue for links */
+    text-decoration: none; /* Remove underline by default */
+    text-align: center;
+    margin-top: 0.5rem; /* Add some space above these links */
+  }
+  
+  .forgotPasswordLink:hover,
+  .toggleLink:hover {
+    text-decoration: underline; /* Underline on hover */
+  }
+  
+  /* New styles for the "Forgot Username / Password?" and "Create an account? Sign up" */
+  /* You'll need to add these elements to your JSX for them to apply */
+  .linkGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem; /* Space above the link group */
+  }
+  
+  .secondaryLink {
+    color: #616161; /* Greyish color for the surrounding text */
+    font-size: 0.875rem;
+  }
+  
+  .secondaryLink span {
+    color: #4285f4; /* Blue for the clickable part */
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .secondaryLink span:hover {
+    text-decoration: underline;
+  }
+
+  .pageWrapper {
+    background-color: #e3f2fd;
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+  
